@@ -1,0 +1,34 @@
+
+# Django and DRF related
+*.pyc
+*.pyo
+__pycache__/
+*.sqlite3
+*.pyc
+*.pyo
+*.pyc
+*.pyo
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# Static files
+/staticfiles/
+
+# Media files
+/media/
+
+# Environment variables file
+.env
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Dependency directories
+venv/
+env/
+node_modules/
