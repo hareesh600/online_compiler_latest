@@ -21,7 +21,7 @@ function Home() {
       <div className="absolute inset-0 z-0 bg-landing-background bg-cover filter blur-sm"></div>
       <div className="relative z-1 flex flex-col items-center justify-center h-full">
         <h1 className="p-8 text-7xl underline drop-shadow-md text-white">
-          Welcome to Code With Friend{" "}
+          Welcome to Code With Friend{" "} A REPLIT Clone
         </h1>
         <h2 className="text-4xl m-10">Happy Coding <span>&#128512;</span> !</h2>
         <div className="w-1/2 bg-zinc-100 flex justify-center rounded-md shadow-2xl">
