@@ -222,7 +222,7 @@ export default function App() {
             let shareid=arr[arr.length-1]
             const baseUrl = "https://wa.me/";
             const messageParams = encodeURIComponent(`Hey join this link and help me with this\n
-            Link:http://localhost:5173/editor/2b9f6f53-b934-45f1-ab54-3780e47ee52c\n
+            Link:http://localhost:5000/editor/2b9f6f53-b934-45f1-ab54-3780e47ee52c\n
             RoomID:${shareid}`);
             const wurl = `${baseUrl}?text=${messageParams}`;
             window.open(wurl, "_blank");

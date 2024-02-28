@@ -1,0 +1,29 @@
+version: '3'
+services:
+  frontend:
+    build : 
+      context: ./clinet-compiler
+      dockerfile: Dockerfile
+    volumes:
+      -  /client-compiler/node_modules
+      - ./clinet-compiler/src:/client-compiler/src
+    ports:
+      - "5000:5000"
+
+  backend:
+    build:
+      context: ./backend/compiler
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/compiler:/backend
+    ports:
+      - '8000:8000'
+
+  compiler:
+    build:
+      context: ./python_compiler
+      dockerfile: Dockerfile
+    
+    ports:
+      - "9000:8080"
+ 

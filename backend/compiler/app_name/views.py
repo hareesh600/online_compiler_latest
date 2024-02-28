@@ -16,6 +16,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.tokens import AccessToken
 import json
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.http import HttpResponse
 @method_decorator(csrf_exempt, name='dispatch')
 class SignUp(APIView):
     def post(self,request):
@@ -57,10 +58,9 @@ class RunCode(APIView):
     authentication_classes = [JWTAuthentication]
     def post(self,request):  
         data=request.data
-       
+        print(data)
 
-
-        url = "http://localhost:9000/2015-03-31/functions/function/invocations"
+        url = "http://compiler:8080/2015-03-31/functions/function/invocations"
         
         # headers = {'Content-type': 'application/json'}
         response = requests.post(url, json=data)
@@ -74,7 +74,8 @@ class RunCode(APIView):
         return Response({'message':'compiled succesfully','output':json_data['body'],'status':status.HTTP_200_OK})
 
         
-
+def test(request):
+    return HttpResponse("<h1>Hello world<h1>")
         
         
 
