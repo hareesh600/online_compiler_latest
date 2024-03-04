@@ -24,7 +24,6 @@ class TestConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         url_path = self.scope['path']
         token = url_path.split('/')[-2]
-        print("*****************",text_data)
         check=text_data_json.get('Message',None)
         if check:
              await self.channel_layer.group_send(token, {
@@ -43,12 +42,9 @@ class TestConsumer(AsyncWebsocketConsumer):
         print(type(event))
         if event.get("Message",None):
             token_payload = AccessToken(event['from']).payload
-            print(event['from'])
-            print("*************************",token_payload)
             userid = token_payload.get('user_id')
             user = await database_sync_to_async(CustomUser.objects.get)(id=userid)
 
-            print(user.email)
             await self.send(text_data=json.dumps({
                 'Message': event['Message'],
                 'from':user.email

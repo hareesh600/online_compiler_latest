@@ -53,29 +53,40 @@ class Login(APIView):
         else:
             return Response({"message": "Invalid credentials", "status": status.HTTP_400_BAD_REQUEST})
            
-       
+
+import re
+
+def replace_input_statements(input_string, replacement_values):
+    # Define a regular expression pattern to match various forms of input() calls
+    pattern = re.compile(r'input\s*\([^)]*\)')
+
+    # Replace matched patterns with values from the list
+    def replace_callback(match):
+        return f'"{replacement_values.pop(0)}"' if replacement_values else '2'
+
+    modified_string = pattern.sub(replace_callback, input_string)
+
+    return modified_string
+
+def modified_code(data):
+    input_data = list(data['inputdata'].split('\n'))
+    for i in range(len(input_data)):
+        input_data[i] = str(input_data[i].strip())
+    data['code'] = replace_input_statements(data['code'],input_data)
+  
 class RunCode(APIView):
     authentication_classes = [JWTAuthentication]
-    def post(self,request):  
+    def post(self,request):
         data=request.data
+        modified_code(data)
         print(data)
 
         url = "http://compiler:8080/2015-03-31/functions/function/invocations"
-        
-        # headers = {'Content-type': 'application/json'}
         response = requests.post(url, json=data)
-        
-        
-        
         json_data=response.json()
-       
-        
-
         return Response({'message':'compiled succesfully','output':json_data['body'],'status':status.HTTP_200_OK})
 
         
-def test(request):
-    return HttpResponse("<h1>Hello world<h1>")
         
         
 
